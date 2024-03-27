@@ -1,0 +1,3 @@
+jwt:
+  secret : hello.this.is.my.java.project
+  expiredMS : 86400
