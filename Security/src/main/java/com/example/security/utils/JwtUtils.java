@@ -15,7 +15,7 @@ public class JwtUtils {
     @Value("${jwt:secret}")
     private String secretKey;
     @Value("${jwt:expiredMs}")
-    private Long expiredMs;
+    private static Long expiredMs;
 
 
     // jwt 생성
@@ -32,11 +32,11 @@ public class JwtUtils {
         ZonedDateTime tokenValidity = now.plusSeconds(expiredMs);
         // jwt 생성
         // JWT 생성
-        String jwt = Jwts.builder()
+        return Jwts.builder()
                 .setClaims(claims) // 클레임 설정
                 .setSubject("subject") // 토큰의 주제 설정
-                .setIssuedAt(new Date()) // 토큰 발급 시간 설정
-                .setExpiration(new Date(System.currentTimeMillis() + )) // 토큰 만료 시간 설정
+                .setIssuedAt(Date.from(now.toInstant())) // 토큰 발급 시간 설정
+                .setExpiration(Date.from(tokenValidity.toInstant())) // 토큰 만료 시간 설정
                 .signWith(key) // 서명 설정
                 .compact(); // 토큰 생성
 
