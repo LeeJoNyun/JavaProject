@@ -1,6 +1,7 @@
 package com.practice.toyproject.config;
 
 import com.practice.toyproject.filter.LoginFilter;
+import com.practice.toyproject.jwt.JwtFilter;
 import com.practice.toyproject.jwt.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,6 +63,9 @@ public class SecurityConfig {
                 .addFilterAt(
                         new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil),
                         UsernamePasswordAuthenticationFilter.class);
+
+        //jwt 검증 필터 추가
+        http.addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class);
 
         http
                 .sessionManagement((session) -> session

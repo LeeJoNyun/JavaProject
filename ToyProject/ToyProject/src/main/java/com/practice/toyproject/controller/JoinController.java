@@ -1,4 +1,4 @@
-package com.practice.toyproject.JoinController;
+package com.practice.toyproject.controller;
 
 import com.practice.toyproject.dto.JoinDTO;
 import com.practice.toyproject.service.JoinService;
